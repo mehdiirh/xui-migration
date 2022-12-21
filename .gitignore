@@ -1,0 +1,18 @@
+.env
+venv
+celerybeat-schedule
+.idea
+*.pyc
+*.sqlite3
+test.py
+*.yaml
+bot.log
+
+# media
+media/orders/*
+/static
+**/.DS_Store
+/fixtures
+
+# don't ignore
+!.gitkeep
