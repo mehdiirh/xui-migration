@@ -27,7 +27,7 @@ done
 [[ -z "$password" ]] && echo -n "Enter password: " && read -sr password && echo;
 
 echo "Installing sshpass..."
-apt install sshpass -y
+apt update -y && apt install sshpass -y
 echo "${BGREEN}Done$NC"
 
 if (x-ui --help &> /dev/null )
