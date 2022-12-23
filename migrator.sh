@@ -46,7 +46,7 @@ fi
 echo "Connecting to \"${server}\" with username \"$username\"..."
 
 echo "Copying database..."
-if (sshpass "$password" scp "${username}"@"${server}":/etc/x-ui/x-ui.db /etc/x-ui/x-ui.db)
+if (sshpass -p "$password" scp "${username}"@"${server}":/etc/x-ui/x-ui.db /etc/x-ui/x-ui.db)
 then
   echo -e "${BGREEN}Successfully copied database from $server $NC"
 else
@@ -74,7 +74,7 @@ then
   echo "Copying SSL certs..."
   mkdir -p "${ssl_path}"
 
-  if (sshpass "$password" scp -r "${username}"@"${server}":"${ssl_path}"/* "${ssl_path}")
+  if (sshpass -p "$password" scp -r "${username}"@"${server}":"${ssl_path}"/* "${ssl_path}")
   then
     echo -e "${BGREEN}Successfully copied SSL certs from $server $NC"
   else
