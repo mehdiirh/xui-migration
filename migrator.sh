@@ -26,9 +26,18 @@ done
 [[ -n "$_username" ]] && username="$_username" || username="root"
 [[ -z "$password" ]] && echo -n "Enter password: " && read -sr password && echo;
 
-echo "Installing sshpass..."
-apt update -y && apt install sshpass -y
-echo "${BGREEN}Done$NC"
+if ( sshpass -V &> /dev/null )
+then
+  echo -e "${BGREEN}sshpass is already installed$NC"
+else
+  echo "Installing sshpass..."
+  if ! ( apt update -y && apt install sshpass -y )
+  then
+    echo -e "${BRED}Error in installing sshpass$NC" && exit 1;
+  else
+    echo -e "${BGREEN}sshpass successfully installed$NC"
+  fi
+fi
 
 if (x-ui --help &> /dev/null )
 then
