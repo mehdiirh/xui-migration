@@ -1,6 +1,7 @@
 #!/bin/bash
 
 unset -v server
+unset -v username
 unset -v password
 
 BGREEN='\033[1;32m'
@@ -15,12 +16,19 @@ do
     case "${flag}" in
       s) server=${OPTARG};;
       u) username=${OPTARG};;
+      p) password=${OPTARG};;
       *) echo "Invalid arg -$flag" && exit 1;;
     esac
 done
 
-[[ -z "$server" ]] && echo -n "Enter server name: " && read -r server;
-[[ -z "$username" ]] && echo -n "Enter username: " && read -r username;
+[[ -z "$server" ]] && echo -n "Enter server address: " && read -r server;
+[[ -z "$username" ]] && echo -n "Enter username [default: root]: " && read -r _username;
+[[ -n "$_username" ]] && username="$_username" || username="root"
+[[ -z "$password" ]] && echo -n "Enter password: " && read -sr password && echo;
+
+echo "Installing sshpass..."
+apt install sshpass -y
+echo "${BGREEN}Done$NC"
 
 if (x-ui --help &> /dev/null )
 then
@@ -38,7 +46,7 @@ fi
 echo "Connecting to \"${server}\" with username \"$username\"..."
 
 echo "Copying database..."
-if (scp "${username}"@"${server}":/etc/x-ui/x-ui.db /etc/x-ui/x-ui.db)
+if (sshpass "$password" scp "${username}"@"${server}":/etc/x-ui/x-ui.db /etc/x-ui/x-ui.db)
 then
   echo -e "${BGREEN}Successfully copied database from $server $NC"
 else
@@ -58,12 +66,15 @@ done
 
 if [[ $ssl_confirm = true ]]
 then
-  echo -n "Enter ssl path: " && read -r ssl_path && echo -e "SSL path: $BRED$ssl_path$NC";
+  _ssl_path="/etc/letsencrypt/live"
+  echo -n "Enter ssl path [default: $_ssl_path]: " && read -r ssl_path;
+  [[ -z "$ssl_path" ]] && ssl_path="$_ssl_path"
+  echo -e "SSL path: $BRED$ssl_path$NC"
 
   echo "Copying SSL certs..."
   mkdir -p "${ssl_path}"
 
-  if (scp -r "${username}"@"${server}":"${ssl_path}"/* "${ssl_path}")
+  if (sshpass "$password" scp -r "${username}"@"${server}":"${ssl_path}"/* "${ssl_path}")
   then
     echo -e "${BGREEN}Successfully copied SSL certs from $server $NC"
   else
