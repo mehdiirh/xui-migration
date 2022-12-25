@@ -26,17 +26,16 @@ done
 [[ -n "$_username" ]] && username="$_username" || username="root"
 [[ -z "$password" ]] && echo -n "Enter password: " && read -sr password && echo;
 
-if ( sshpass -V &> /dev/null )
-then
+if ( sshpass -V &> /dev/null ); then
   echo -e "${BGREEN}sshpass is already installed$NC"
 else
   echo "Installing sshpass..."
-  if ! ( apt update -y && apt install sshpass -y )
-  then
-    echo -e "${BRED}Error in installing sshpass$NC" && exit 1;
-  else
-    echo -e "${BGREEN}sshpass successfully installed$NC"
+  if ! ( apt install sshpass -y ); then
+    if ! (apt update -y && apt install sshpass -y); then
+      echo -e "${BRED}Error in installing sshpass$NC" && exit 1;
+    fi
   fi
+  echo -e "${BGREEN}sshpass successfully installed$NC"
 fi
 
 if (x-ui --help &> /dev/null )
@@ -53,6 +52,10 @@ else
 fi
 
 echo "Connecting to \"${server}\" with username \"$username\"..."
+
+echo "adding $server to known hosts..."
+ssh-keyscan -H "${server}" >> ~/.ssh/known_hosts
+echo "${BGREEN}Done$NC"
 
 echo "Copying database..."
 if (sshpass -p "$password" scp "${username}"@"${server}":/etc/x-ui/x-ui.db /etc/x-ui/x-ui.db)
