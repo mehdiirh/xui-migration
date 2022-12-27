@@ -11,15 +11,15 @@ You can pass the credentials of your old server to the script for one-line migra
 
 ### SSH Arguments:
 
-| ARG |   DESCRIPTION   | EXAMPLE      |
-|:---:|:---------------:|--------------|
-| -s  | server address  | 192.168.1.1  |
- | -u  | server username | root         |
-| -p  | server password | myPassword!$ |
+| ARG |   DESCRIPTION   | EXAMPLE    |
+|:---:|:---------------:|------------|
+| -s  | server address  | 192.168.1.1 |
+ | -u  | server username | root       |
+| -p  | server password | MyPaSsWoEd |
 
 ### One-line migration example
 ```bash
-sudo bash <(curl -Ls https://raw.githubusercontent.com/mehdiirh/xui-migation/master/migrator.sh) -s 192.168.1.1 -u root -p myPassword!$ 
+sudo bash <(curl -Ls https://raw.githubusercontent.com/mehdiirh/xui-migation/master/migrator.sh) -s 192.168.1.1 -u root -p MyPaSsWoEd
 ```
 
 ## ~
