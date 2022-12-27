@@ -11,11 +11,11 @@ You can pass the credentials of your old server to the script for one-line migra
 
 ### SSH Arguments:
 
-| ARG |   DESCRIPTION   | EXAMPLE    |
-|:---:|:---------------:|------------|
+| ARG | DESCRIPTION     | EXAMPLE     |
+|:---:|-----------------|-------------|
 | -s  | server address  | 192.168.1.1 |
- | -u  | server username | root       |
-| -p  | server password | MyPaSsWoEd |
+ | -u  | server username | root        |
+| -p  | server password | MyPaSsWoEd  |
 
 ### One-line migration example
 ```bash
