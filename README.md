@@ -6,8 +6,8 @@ sudo bash <(curl -Ls https://raw.githubusercontent.com/mehdiirh/xui-migation/mas
 ```
 and follow the instructions.
 
-## One line migration
-You can pass credentials of your old server to the script for one line migration.
+## One-line migration
+You can pass the credentials of your old server to the script for one-line migration.
 
 ### SSH Arguments:
 
@@ -17,7 +17,7 @@ You can pass credentials of your old server to the script for one line migration
  | -u  | server username | root         |
 | -p  | server password | myPassword!$ |
 
-### One line migration example
+### One-line migration example
 ```bash
 sudo bash <(curl -Ls https://raw.githubusercontent.com/mehdiirh/xui-migation/master/migrator.sh) -s 192.168.1.1 -u root -p myPassword!$ 
 ```
