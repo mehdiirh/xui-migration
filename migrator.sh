@@ -62,7 +62,7 @@ if (sshpass -p "$password" scp "${username}"@"${server}":/etc/x-ui/x-ui.db /etc/
 then
   echo -e "${BGREEN}Successfully copied database from $server $NC"
 else
-  echo -e "${BRED}Error while trying to connect to $server"
+  echo -e "${BRED}Error while trying to connect to $server $NC"
 fi
 
 unset -v ssl_confirm;
@@ -90,7 +90,7 @@ then
   then
     echo -e "${BGREEN}Successfully copied SSL certs from $server $NC"
   else
-    echo -e "${BRED}Error while trying to connect to $server"
+    echo -e "${BRED}Error while trying to connect to $server $NC"
   fi
 fi
 
