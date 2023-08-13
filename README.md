@@ -2,7 +2,7 @@
 
 ### On your new server run:
 ```bash
-sudo bash <(curl -Ls https://raw.githubusercontent.com/mehdiirh/xui-migation/master/migrator.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/mehdiirh/xui-migation/master/migrator.sh)
 ```
 and follow the instructions.
 
